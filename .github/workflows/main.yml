@@ -28,3 +28,15 @@ jobs:
         name: "CICD-TESTING-profile.apk" # Name of file in drive. Needs to be same as temporary file.
         overwrite: "true" # This will overwrite temporary file
         mimetype: application/vnd.android.package-archive
+        
+  SendingApk:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Sending Mail
+      uses: fjogeleit/http-request-action@v1.9.2
+      with:
+        url: "https://cicd-nodejs-production.up.railway.app/sendMail"
+        method: 'POST'
+        data: '{"companyLogoUrl": "<APP COMPANY LOGO URL>","appLink": "<YOUR TEMPORARY FILE URL>","subject": "SUBJECT OF MAIL","to": ["bhaskar@rootally.com","bhaskar18bcs@iiitkottayam.ac.in"]}'      
