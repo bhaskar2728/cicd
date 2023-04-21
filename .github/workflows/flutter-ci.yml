@@ -1,6 +1,7 @@
 name: Flutter CI
 
-on: workflow_dispatch
+name: My First Manual Workflow
+on: [workflow_dispatch]
 
 jobs:
   build:
